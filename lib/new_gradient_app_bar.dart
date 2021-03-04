@@ -1,4 +1,4 @@
-library gradient_app_bar;
+library new_gradient_app_bar;
 
 import 'dart:math' as math;
 
@@ -50,7 +50,7 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 ///
 /// App bars are typically used in the [Scaffold.appBar] property, which places
 /// the app bar as a fixed-height widget at the top of the screen. For a scrollable
-/// app bar, see [SliverGradientAppBar], which embeds an [GradientAppBar] in a sliver for use in
+/// app bar, see [SliverNewGradientAppBar], which embeds an [NewGradientAppBar] in a sliver for use in
 /// a [CustomScrollView].
 ///
 /// When not used as [Scaffold.appBar], or when wrapped in a [Hero], place the app
@@ -68,7 +68,7 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 /// the title is between them. The bottom is, naturally, at the bottom, and the
 /// flexibleSpace is behind all of them.](https://flutter.github.io/assets-for-api-docs/assets/material/app_bar.png)
 ///
-/// If the [leading] widget is omitted, but the [GradientAppBar] is in a [Scaffold] with
+/// If the [leading] widget is omitted, but the [NewGradientAppBar] is in a [Scaffold] with
 /// a [Drawer], then a button will be inserted to open the drawer. Otherwise, if
 /// the nearest [Navigator] has any previous routes, a [BackButton] is inserted
 /// instead. This behavior can be turned off by setting the [automaticallyImplyLeading]
@@ -77,7 +77,7 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 ///
 /// {@tool snippet --template=stateless_widget_material}
 ///
-/// This sample shows an [GradientAppBar] with two simple actions. The first action
+/// This sample shows an [NewGradientAppBar] with two simple actions. The first action
 /// opens a [SnackBar], while the second action navigates to a new page.
 ///
 /// ```dart preamble
@@ -139,17 +139,17 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 ///
 /// See also:
 ///
-///  * [Scaffold], which displays the [GradientAppBar] in its [Scaffold.appBar] slot.
-///  * [SliverGradientAppBar], which uses [GradientAppBar] to provide a flexible app bar that
+///  * [Scaffold], which displays the [NewGradientAppBar] in its [Scaffold.appBar] slot.
+///  * [SliverNewGradientAppBar], which uses [NewGradientAppBar] to provide a flexible app bar that
 ///    can be used in a [CustomScrollView].
-///  * [TabBar], which is typically placed in the [bottom] slot of the [GradientAppBar]
+///  * [TabBar], which is typically placed in the [bottom] slot of the [NewGradientAppBar]
 ///    if the screen has multiple pages arranged in tabs.
 ///  * [IconButton], which is used with [actions] to show buttons on the app bar.
 ///  * [PopupMenuButton], to show a popup menu on the app bar, via [actions].
 ///  * [FlexibleSpaceBar], which is used with [flexibleSpace] when the app bar
 ///    can expand and collapse.
 ///  * <https://material.io/design/components/app-bars-top.html>
-class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
+class NewGradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Creates a material design app bar.
   ///
   /// The arguments [primary], [toolbarOpacity], [bottomOpacity]
@@ -162,7 +162,7 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// then the default specified in the property's documentation will be used.
   ///
   /// Typically used in the [Scaffold.appBar] property.
-  GradientAppBar({
+  NewGradientAppBar({
     Key key,
     this.leading,
     this.automaticallyImplyLeading = true,
@@ -195,10 +195,10 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// A widget to display before the [title].
   ///
   /// If this is null and [automaticallyImplyLeading] is set to true, the
-  /// [GradientAppBar] will imply an appropriate widget. For example, if the [GradientAppBar] is
+  /// [NewGradientAppBar] will imply an appropriate widget. For example, if the [NewGradientAppBar] is
   /// in a [Scaffold] that also has a [Drawer], the [Scaffold] will fill this
   /// widget with an [IconButton] that opens the drawer (using [Icons.menu]). If
-  /// there's no [Drawer] and the parent [Navigator] can go back, the [GradientAppBar]
+  /// there's no [Drawer] and the parent [Navigator] can go back, the [NewGradientAppBar]
   /// will use a [BackButton] that calls [Navigator.maybePop].
   ///
   /// {@tool sample}
@@ -229,7 +229,7 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// See also:
   ///
-  ///  * [Scaffold.appBar], in which an [GradientAppBar] is usually placed.
+  ///  * [Scaffold.appBar], in which an [NewGradientAppBar] is usually placed.
   ///  * [Scaffold.drawer], in which the [Drawer] is usually placed.
   final Widget leading;
 
@@ -256,9 +256,9 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// This widget is stacked behind the toolbar and the tab bar. It's height will
   /// be the same as the app bar's overall height.
   ///
-  /// A flexible space isn't actually flexible unless the [GradientAppBar]'s container
-  /// changes the [GradientAppBar]'s size. A [SliverGradientAppBar] in a [CustomScrollView]
-  /// changes the [GradientAppBar]'s height when scrolled.
+  /// A flexible space isn't actually flexible unless the [NewGradientAppBar]'s container
+  /// changes the [NewGradientAppBar]'s size. A [SliverNewGradientAppBar] in a [CustomScrollView]
+  /// changes the [NewGradientAppBar]'s height when scrolled.
   ///
   /// Typically a [FlexibleSpaceBar]. See [FlexibleSpaceBar] for details.
   final Widget flexibleSpace;
@@ -350,7 +350,7 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// A value of 1.0 is fully opaque, and a value of 0.0 is fully transparent.
   ///
   /// Typically, this value is not changed from its default value (1.0). It is
-  /// used by [SliverGradientAppBar] to animate the opacity of the toolbar when the app
+  /// used by [SliverNewGradientAppBar] to animate the opacity of the toolbar when the app
   /// bar is scrolled.
   final double toolbarOpacity;
 
@@ -359,7 +359,7 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// A value of 1.0 is fully opaque, and a value of 0.0 is fully transparent.
   ///
   /// Typically, this value is not changed from its default value (1.0). It is
-  /// used by [SliverGradientAppBar] to animate the opacity of the toolbar when the app
+  /// used by [SliverNewGradientAppBar] to animate the opacity of the toolbar when the app
   /// bar is scrolled.
   final double bottomOpacity;
 
@@ -390,10 +390,10 @@ class GradientAppBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  _GradientAppBarState createState() => _GradientAppBarState();
+  _NewGradientAppBarState createState() => _NewGradientAppBarState();
 }
 
-class _GradientAppBarState extends State<GradientAppBar> {
+class _NewGradientAppBarState extends State<NewGradientAppBar> {
   static const double _defaultElevation = 4.0;
 
   void _handleDrawerButton() {
@@ -751,7 +751,7 @@ class _SliverGradientAppBarDelegate extends SliverPersistentHeaderDelegate {
       maxExtent: maxExtent,
       currentExtent: math.max(minExtent, maxExtent - shrinkOffset),
       toolbarOpacity: toolbarOpacity,
-      child: GradientAppBar(
+      child: NewGradientAppBar(
         leading: leading,
         automaticallyImplyLeading: automaticallyImplyLeading,
         title: title,
@@ -826,7 +826,7 @@ class _SliverGradientAppBarDelegate extends SliverPersistentHeaderDelegate {
 /// [CustomScrollView], which lets the app bar integrate with the scroll view so
 /// that it can vary in height according to the scroll offset or float above the
 /// other content in the scroll view. For a fixed-height app bar at the top of
-/// the screen see [GradientAppBar], which is used in the [Scaffold.appBar] slot.
+/// the screen see [NewGradientAppBar], which is used in the [Scaffold.appBar] slot.
 ///
 /// The GradientAppBar displays the toolbar widgets, [leading], [title], and
 /// [actions], above the [bottom] (if any). If a [flexibleSpace] widget is
@@ -881,22 +881,22 @@ class _SliverGradientAppBarDelegate extends SliverPersistentHeaderDelegate {
 ///
 /// See also:
 ///
-///  * [CustomScrollView], which integrates the [SliverGradientAppBar] into its
+///  * [CustomScrollView], which integrates the [SliverNewGradientAppBar] into its
 ///    scrolling.
-///  * [GradientAppBar], which is a fixed-height app bar for use in [Scaffold.appBar].
-///  * [TabBar], which is typically placed in the [bottom] slot of the [GradientAppBar]
+///  * [NewGradientAppBar], which is a fixed-height app bar for use in [Scaffold.appBar].
+///  * [TabBar], which is typically placed in the [bottom] slot of the [NewGradientAppBar]
 ///    if the screen has multiple pages arranged in tabs.
 ///  * [IconButton], which is used with [actions] to show buttons on the app bar.
 ///  * [PopupMenuButton], to show a popup menu on the app bar, via [actions].
 ///  * [FlexibleSpaceBar], which is used with [flexibleSpace] when the app bar
 ///    can expand and collapse.
 ///  * <https://material.io/design/components/app-bars-top.html>
-class SliverGradientAppBar extends StatefulWidget {
+class SliverNewGradientAppBar extends StatefulWidget {
   /// Creates a material design app bar that can be placed in a [CustomScrollView].
   ///
   /// The arguments [forceElevated], [primary], [floating], [pinned], [snap]
   /// and [automaticallyImplyLeading] must not be null.
-  const SliverGradientAppBar({
+  const SliverNewGradientAppBar({
     Key key,
     this.leading,
     this.automaticallyImplyLeading = true,
@@ -932,11 +932,11 @@ class SliverGradientAppBar extends StatefulWidget {
 
   /// A widget to display before the [title].
   ///
-  /// If this is null and [automaticallyImplyLeading] is set to true, the [GradientAppBar] will
-  /// imply an appropriate widget. For example, if the [GradientAppBar] is in a [Scaffold]
+  /// If this is null and [automaticallyImplyLeading] is set to true, the [NewGradientAppBar] will
+  /// imply an appropriate widget. For example, if the [NewGradientAppBar] is in a [Scaffold]
   /// that also has a [Drawer], the [Scaffold] will fill this widget with an
   /// [IconButton] that opens the drawer. If there's no [Drawer] and the parent
-  /// [Navigator] can go back, the [GradientAppBar] will use a [BackButton] that calls
+  /// [Navigator] can go back, the [NewGradientAppBar] will use a [BackButton] that calls
   /// [Navigator.maybePop].
   final Widget leading;
 
@@ -1016,10 +1016,10 @@ class SliverGradientAppBar extends StatefulWidget {
   final double elevation;
 
   /// Whether to show the shadow appropriate for the [elevation] even if the
-  /// content is not scrolled under the [GradientAppBar].
+  /// content is not scrolled under the [NewGradientAppBar].
   ///
   /// Defaults to false, meaning that the [elevation] is only applied when the
-  /// [GradientAppBar] is being displayed over content that is scrolled under it.
+  /// [NewGradientAppBar] is being displayed over content that is scrolled under it.
   ///
   /// When set to true, the [elevation] is applied regardless.
   ///
@@ -1111,7 +1111,7 @@ class SliverGradientAppBar extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [SliverGradientAppBar] for more animated examples of how this property changes the
+  ///  * [SliverNewGradientAppBar] for more animated examples of how this property changes the
   ///    behavior of the app bar in combination with [pinned] and [snap].
   final bool floating;
 
@@ -1132,7 +1132,7 @@ class SliverGradientAppBar extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [SliverGradientAppBar] for more animated examples of how this property changes the
+  ///  * [SliverNewGradientAppBar] for more animated examples of how this property changes the
   ///    behavior of the app bar in combination with [floating].
   final bool pinned;
 
@@ -1165,17 +1165,17 @@ class SliverGradientAppBar extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [SliverGradientAppBar] for more animated examples of how this property changes the
+  ///  * [SliverNewGradientAppBar] for more animated examples of how this property changes the
   ///    behavior of the app bar in combination with [pinned] and [floating].
   final bool snap;
 
   @override
-  _SliverGradientAppBarState createState() => _SliverGradientAppBarState();
+  _SliverNewGradientAppBarState createState() => _SliverNewGradientAppBarState();
 }
 
 // This class is only Stateful because it owns the TickerProvider used
 // by the floating appbar snap animation (via FloatingHeaderSnapConfiguration).
-class _SliverGradientAppBarState extends State<SliverGradientAppBar>
+class _SliverNewGradientAppBarState extends State<SliverNewGradientAppBar>
     with TickerProviderStateMixin {
   FloatingHeaderSnapConfiguration _snapConfiguration;
 
@@ -1197,7 +1197,7 @@ class _SliverGradientAppBarState extends State<SliverGradientAppBar>
   }
 
   @override
-  void didUpdateWidget(SliverGradientAppBar oldWidget) {
+  void didUpdateWidget(SliverNewGradientAppBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.snap != oldWidget.snap || widget.floating != oldWidget.floating)
       _updateSnapConfiguration();

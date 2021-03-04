@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import './semantics_tester.dart';
-import '../lib/gradient_app_bar.dart';
+import '../lib/new_gradient_app_bar.dart';
 
-Widget buildSliverGradientAppBarApp(
+Widget buildSliverNewGradientAppBarApp(
     {bool floating, bool pinned, double expandedHeight, bool snap = false}) {
   return Localizations(
     locale: const Locale('en', 'US'),
@@ -24,8 +24,8 @@ Widget buildSliverGradientAppBarApp(
             child: CustomScrollView(
               primary: true,
               slivers: <Widget>[
-                SliverGradientAppBar(
-                  title: const Text('GradientAppBar Title'),
+                SliverNewGradientAppBar(
+                  title: const Text('NewGradientAppBar Title'),
                   floating: floating,
                   pinned: pinned,
                   expandedHeight: expandedHeight,
@@ -57,13 +57,13 @@ ScrollController primaryScrollController(WidgetTester tester) {
 }
 
 double appBarHeight(WidgetTester tester) =>
-    tester.getSize(find.byType(GradientAppBar, skipOffstage: false)).height;
+    tester.getSize(find.byType(NewGradientAppBar, skipOffstage: false)).height;
 
 double appBarTop(WidgetTester tester) =>
-    tester.getTopLeft(find.byType(GradientAppBar, skipOffstage: false)).dy;
+    tester.getTopLeft(find.byType(NewGradientAppBar, skipOffstage: false)).dy;
 
 double appBarBottom(WidgetTester tester) =>
-    tester.getBottomLeft(find.byType(GradientAppBar, skipOffstage: false)).dy;
+    tester.getBottomLeft(find.byType(NewGradientAppBar, skipOffstage: false)).dy;
 
 double tabBarHeight(WidgetTester tester) =>
     tester.getSize(find.byType(TabBar, skipOffstage: false)).height;
@@ -73,13 +73,13 @@ void main() {
     debugResetSemanticsIdCounter();
   });
 
-  testWidgets('GradientAppBar centers title on iOS',
+  testWidgets('NewGradientAppBar centers title on iOS',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
           ),
         ),
@@ -98,7 +98,7 @@ void main() {
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.iOS),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
           ),
         ),
@@ -116,7 +116,7 @@ void main() {
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.iOS),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
             actions: const <Widget>[
               Icon(Icons.thumb_up),
@@ -137,7 +137,7 @@ void main() {
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.iOS),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
             actions: const <Widget>[
               Icon(Icons.thumb_up),
@@ -153,12 +153,12 @@ void main() {
     expect(center.dx, lessThan(400 - size.width / 2.0));
   });
 
-  testWidgets('GradientAppBar centerTitle:true centers on Android',
+  testWidgets('NewGradientAppBar centerTitle:true centers on Android',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(platform: TargetPlatform.android),
       home: Scaffold(
-        appBar: GradientAppBar(
+        appBar: NewGradientAppBar(
           centerTitle: true,
           title: const Text('X'),
         ),
@@ -172,12 +172,12 @@ void main() {
     expect(center.dx, lessThan(400 + size.width / 2.0));
   });
 
-  testWidgets('GradientAppBar centerTitle:false title start edge is 16.0 (LTR)',
+  testWidgets('NewGradientAppBar centerTitle:false title start edge is 16.0 (LTR)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             centerTitle: false,
             title: const Placeholder(key: Key('X')),
           ),
@@ -190,14 +190,14 @@ void main() {
     expect(tester.getTopRight(titleWidget).dx, 800 - 16.0);
   });
 
-  testWidgets('GradientAppBar centerTitle:false title start edge is 16.0 (RTL)',
+  testWidgets('NewGradientAppBar centerTitle:false title start edge is 16.0 (RTL)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               centerTitle: false,
               title: const Placeholder(key: Key('X')),
             ),
@@ -211,12 +211,12 @@ void main() {
     expect(tester.getTopLeft(titleWidget).dx, 16.0);
   });
 
-  testWidgets('GradientAppBar titleSpacing:32 title start edge is 32.0 (LTR)',
+  testWidgets('NewGradientAppBar titleSpacing:32 title start edge is 32.0 (LTR)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             centerTitle: false,
             titleSpacing: 32.0,
             title: const Placeholder(key: Key('X')),
@@ -230,14 +230,14 @@ void main() {
     expect(tester.getTopRight(titleWidget).dx, 800 - 32.0);
   });
 
-  testWidgets('GradientAppBar titleSpacing:32 title start edge is 32.0 (RTL)',
+  testWidgets('NewGradientAppBar titleSpacing:32 title start edge is 32.0 (RTL)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               centerTitle: false,
               titleSpacing: 32.0,
               title: const Placeholder(key: Key('X')),
@@ -253,12 +253,12 @@ void main() {
   });
 
   testWidgets(
-      'GradientAppBar centerTitle:false leading button title left edge is 72.0 (LTR)',
+      'NewGradientAppBar centerTitle:false leading button title left edge is 72.0 (LTR)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             centerTitle: false,
             title: const Text('X'),
           ),
@@ -272,14 +272,14 @@ void main() {
   });
 
   testWidgets(
-      'GradientAppBar centerTitle:false leading button title left edge is 72.0 (RTL)',
+      'NewGradientAppBar centerTitle:false leading button title left edge is 72.0 (RTL)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               centerTitle: false,
               title: const Text('X'),
             ),
@@ -293,7 +293,7 @@ void main() {
     expect(tester.getTopRight(find.text('X')).dx, 800.0 - 72.0);
   });
 
-  testWidgets('GradientAppBar centerTitle:false title overflow OK',
+  testWidgets('NewGradientAppBar centerTitle:false title overflow OK',
       (WidgetTester tester) async {
     // The app bar's title should be constrained to fit within the available space
     // between the leading and actions widgets.
@@ -305,7 +305,7 @@ void main() {
     Widget buildApp() {
       return MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             leading: leading,
             centerTitle: false,
             title: Container(
@@ -352,7 +352,7 @@ void main() {
             -
             200.0)); // Actions' width.
 
-    leading = Container(); // GradientAppBar will constrain the width to 24.0
+    leading = Container(); // NewGradientAppBar will constrain the width to 24.0
     await tester.pumpWidget(buildApp());
     expect(tester.getTopLeft(title).dx, 72.0);
     // Adding a leading widget shouldn't effect the title's size
@@ -360,7 +360,7 @@ void main() {
         equals(800.0 - 56.0 - 16.0 - 16.0 - 200.0));
   });
 
-  testWidgets('GradientAppBar centerTitle:true title overflow OK (LTR)',
+  testWidgets('NewGradientAppBar centerTitle:true title overflow OK (LTR)',
       (WidgetTester tester) async {
     // The app bar's title should be constrained to fit within the available space
     // between the leading and actions widgets. When it's also centered it may
@@ -374,7 +374,7 @@ void main() {
     Widget buildApp() {
       return MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             leading: leading,
             centerTitle: true,
             title: Container(
@@ -413,7 +413,7 @@ void main() {
     expect(tester.getSize(title).width, equals(620.0));
   });
 
-  testWidgets('GradientAppBar centerTitle:true title overflow OK (RTL)',
+  testWidgets('NewGradientAppBar centerTitle:true title overflow OK (RTL)',
       (WidgetTester tester) async {
     // The app bar's title should be constrained to fit within the available space
     // between the leading and actions widgets. When it's also centered it may
@@ -429,7 +429,7 @@ void main() {
         home: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               leading: leading,
               centerTitle: true,
               title: Container(
@@ -469,12 +469,12 @@ void main() {
     expect(tester.getSize(title).width, equals(620.0));
   });
 
-  testWidgets('GradientAppBar with no Scaffold', (WidgetTester tester) async {
+  testWidgets('NewGradientAppBar with no Scaffold', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: SizedBox(
           height: kToolbarHeight,
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: const Text('L'),
             title: const Text('No Scaffold'),
             actions: const <Widget>[Text('A1'), Text('A2')],
@@ -489,7 +489,7 @@ void main() {
     expect(find.text('A2'), findsOneWidget);
   });
 
-  testWidgets('GradientAppBar render at zero size',
+  testWidgets('NewGradientAppBar render at zero size',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -498,7 +498,7 @@ void main() {
             height: 0.0,
             width: 0.0,
             child: Scaffold(
-              appBar: GradientAppBar(
+              appBar: NewGradientAppBar(
                 title: const Text('X'),
               ),
             ),
@@ -511,7 +511,7 @@ void main() {
     expect(tester.getSize(title).isEmpty, isTrue);
   });
 
-  testWidgets('GradientAppBar actions are vertically centered',
+  testWidgets('NewGradientAppBar actions are vertically centered',
       (WidgetTester tester) async {
     final UniqueKey appBarKey = UniqueKey();
     final UniqueKey leadingKey = UniqueKey();
@@ -522,7 +522,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             key: appBarKey,
             leading: SizedBox(key: leadingKey, height: 50.0),
             title: SizedBox(key: titleKey, height: 40.0),
@@ -550,7 +550,7 @@ void main() {
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
           ),
           drawer:
@@ -570,7 +570,7 @@ void main() {
       MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
         home: Scaffold(
-          appBar: GradientAppBar(
+          appBar: NewGradientAppBar(
             title: const Text('X'),
             actions: const <Widget>[
               IconButton(
@@ -601,9 +601,9 @@ void main() {
     expect(tester.getSize(shareButton), const Size(48.0, 56.0));
   });
 
-  testWidgets('SliverGradientAppBar default configuration',
+  testWidgets('SliverNewGradientAppBar default configuration',
       (WidgetTester tester) async {
-    await tester.pumpWidget(buildSliverGradientAppBarApp(
+    await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: false,
       pinned: false,
       expandedHeight: null,
@@ -611,36 +611,36 @@ void main() {
 
     final ScrollController controller = primaryScrollController(tester);
     expect(controller.offset, 0.0);
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
 
-    final double initialGradientAppBarHeight = appBarHeight(tester);
+    final double initialNewGradientAppBarHeight = appBarHeight(tester);
     final double initialTabBarHeight = tabBarHeight(tester);
 
     // Scroll the not-pinned appbar partially out of view
     controller.jumpTo(50.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
-    expect(appBarHeight(tester), initialGradientAppBarHeight);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
+    expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
 
     // Scroll the not-pinned appbar out of view
     controller.jumpTo(600.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsNothing);
-    expect(appBarHeight(tester), initialGradientAppBarHeight);
+    expect(find.byType(SliverNewGradientAppBar), findsNothing);
+    expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
 
     // Scroll the not-pinned appbar back into view
     controller.jumpTo(0.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
-    expect(appBarHeight(tester), initialGradientAppBarHeight);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
+    expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
   });
 
-  testWidgets('SliverGradientAppBar expandedHeight, pinned',
+  testWidgets('SliverNewGradientAppBar expandedHeight, pinned',
       (WidgetTester tester) async {
-    await tester.pumpWidget(buildSliverGradientAppBarApp(
+    await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: false,
       pinned: true,
       expandedHeight: 128.0,
@@ -648,32 +648,32 @@ void main() {
 
     final ScrollController controller = primaryScrollController(tester);
     expect(controller.offset, 0.0);
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), 128.0);
 
-    const double initialGradientAppBarHeight = 128.0;
+    const double initialNewGradientAppBarHeight = 128.0;
     final double initialTabBarHeight = tabBarHeight(tester);
 
     // Scroll the not-pinned appbar, collapsing the expanded height. At this
     // point both the toolbar and the tabbar are visible.
     controller.jumpTo(600.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
-    expect(appBarHeight(tester), lessThan(initialGradientAppBarHeight));
+    expect(appBarHeight(tester), lessThan(initialNewGradientAppBarHeight));
     expect(appBarHeight(tester), greaterThan(initialTabBarHeight));
 
     // Scroll the not-pinned appbar back into view
     controller.jumpTo(0.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
-    expect(appBarHeight(tester), initialGradientAppBarHeight);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
+    expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
   });
 
-  testWidgets('SliverGradientAppBar expandedHeight, pinned and floating',
+  testWidgets('SliverNewGradientAppBar expandedHeight, pinned and floating',
       (WidgetTester tester) async {
-    await tester.pumpWidget(buildSliverGradientAppBarApp(
+    await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: true,
       pinned: true,
       expandedHeight: 128.0,
@@ -681,38 +681,38 @@ void main() {
 
     final ScrollController controller = primaryScrollController(tester);
     expect(controller.offset, 0.0);
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), 128.0);
 
-    const double initialGradientAppBarHeight = 128.0;
+    const double initialNewGradientAppBarHeight = 128.0;
     final double initialTabBarHeight = tabBarHeight(tester);
 
     // Scroll the floating-pinned appbar, collapsing the expanded height. At this
     // point only the tabBar is visible.
     controller.jumpTo(600.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
-    expect(appBarHeight(tester), lessThan(initialGradientAppBarHeight));
+    expect(appBarHeight(tester), lessThan(initialNewGradientAppBarHeight));
     expect(appBarHeight(tester), initialTabBarHeight);
 
     // Scroll the floating-pinned appbar back into view
     controller.jumpTo(0.0);
     await tester.pump();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
-    expect(appBarHeight(tester), initialGradientAppBarHeight);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
+    expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
   });
 
-  testWidgets('SliverGradientAppBar expandedHeight, floating with snap:true',
+  testWidgets('SliverNewGradientAppBar expandedHeight, floating with snap:true',
       (WidgetTester tester) async {
-    await tester.pumpWidget(buildSliverGradientAppBarApp(
+    await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: true,
       pinned: false,
       snap: true,
       expandedHeight: 128.0,
     ));
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarTop(tester), 0.0);
     expect(appBarHeight(tester), 128.0);
     expect(appBarBottom(tester), 128.0);
@@ -722,7 +722,7 @@ void main() {
         tester.state<ScrollableState>(find.byType(Scrollable)).position;
     position.jumpTo(256.00);
     await tester.pumpAndSettle();
-    expect(find.byType(SliverGradientAppBar), findsNothing);
+    expect(find.byType(SliverNewGradientAppBar), findsNothing);
     expect(appBarTop(tester), lessThanOrEqualTo(-128.0));
 
     // Drag the scrollable up and down. The app bar should not snap open, its
@@ -789,15 +789,15 @@ void main() {
   });
 
   testWidgets(
-      'SliverGradientAppBar expandedHeight, floating and pinned with snap:true',
+      'SliverNewGradientAppBar expandedHeight, floating and pinned with snap:true',
       (WidgetTester tester) async {
-    await tester.pumpWidget(buildSliverGradientAppBarApp(
+    await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: true,
       pinned: true,
       snap: true,
       expandedHeight: 128.0,
     ));
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarTop(tester), 0.0);
     expect(appBarHeight(tester), 128.0);
     expect(appBarBottom(tester), 128.0);
@@ -808,7 +808,7 @@ void main() {
         tester.state<ScrollableState>(find.byType(Scrollable)).position;
     position.jumpTo(256.0);
     await tester.pumpAndSettle();
-    expect(find.byType(SliverGradientAppBar), findsOneWidget);
+    expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarTop(tester), 0.0);
     expect(appBarHeight(tester), kTextTabBarHeight);
 
@@ -877,7 +877,7 @@ void main() {
     expect(appBarBottom(tester), kTextTabBarHeight);
   });
 
-  testWidgets('GradientAppBar dimensions, with and without bottom, primary',
+  testWidgets('NewGradientAppBar dimensions, with and without bottom, primary',
       (WidgetTester tester) async {
     const MediaQueryData topPadding100 =
         MediaQueryData(padding: EdgeInsets.only(top: 100.0));
@@ -894,7 +894,7 @@ void main() {
           data: topPadding100,
           child: Scaffold(
             primary: false,
-            appBar: GradientAppBar(),
+            appBar: NewGradientAppBar(),
           ),
         ),
       ),
@@ -914,7 +914,7 @@ void main() {
           data: topPadding100,
           child: Scaffold(
             primary: true,
-            appBar: GradientAppBar(title: const Text('title')),
+            appBar: NewGradientAppBar(title: const Text('title')),
           ),
         ),
       ),
@@ -935,7 +935,7 @@ void main() {
           data: topPadding100,
           child: Scaffold(
             primary: false,
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(200.0),
                 child: Container(),
@@ -960,7 +960,7 @@ void main() {
           data: topPadding100,
           child: Scaffold(
             primary: true,
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(200.0),
                 child: Container(),
@@ -984,7 +984,7 @@ void main() {
           textDirection: TextDirection.ltr,
           child: MediaQuery(
             data: topPadding100,
-            child: GradientAppBar(
+            child: NewGradientAppBar(
               primary: false,
               title: const Text('title'),
             ),
@@ -996,12 +996,12 @@ void main() {
     expect(tester.getTopLeft(find.text('title')).dy, lessThan(100.0));
   });
 
-  testWidgets('GradientAppBar updates when you add a drawer',
+  testWidgets('NewGradientAppBar updates when you add a drawer',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          appBar: GradientAppBar(),
+          appBar: NewGradientAppBar(),
         ),
       ),
     );
@@ -1010,7 +1010,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           drawer: const Drawer(),
-          appBar: GradientAppBar(),
+          appBar: NewGradientAppBar(),
         ),
       ),
     );
@@ -1018,26 +1018,26 @@ void main() {
   });
 
   testWidgets(
-      'GradientAppBar does not draw menu for drawer if automaticallyImplyLeading is false',
+      'NewGradientAppBar does not draw menu for drawer if automaticallyImplyLeading is false',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           drawer: const Drawer(),
-          appBar: GradientAppBar(automaticallyImplyLeading: false),
+          appBar: NewGradientAppBar(automaticallyImplyLeading: false),
         ),
       ),
     );
     expect(find.byIcon(Icons.menu), findsNothing);
   });
 
-  testWidgets('GradientAppBar handles loose children 0',
+  testWidgets('NewGradientAppBar handles loose children 0',
       (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: Placeholder(key: key),
             title: const Text('Abc'),
             actions: const <Widget>[
@@ -1058,13 +1058,13 @@ void main() {
         const Size(56.0, 56.0));
   });
 
-  testWidgets('GradientAppBar handles loose children 1',
+  testWidgets('NewGradientAppBar handles loose children 1',
       (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: Placeholder(key: key),
             title: const Text('Abc'),
             actions: const <Widget>[
@@ -1094,13 +1094,13 @@ void main() {
         const Size(56.0, 56.0));
   });
 
-  testWidgets('GradientAppBar handles loose children 2',
+  testWidgets('NewGradientAppBar handles loose children 2',
       (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: Placeholder(key: key),
             title: const Text('Abc'),
             actions: const <Widget>[
@@ -1141,13 +1141,13 @@ void main() {
         const Size(56.0, 56.0));
   });
 
-  testWidgets('GradientAppBar handles loose children 3',
+  testWidgets('NewGradientAppBar handles loose children 3',
       (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: Placeholder(key: key),
             title: const Text('Abc'),
             actions: const <Widget>[
@@ -1180,7 +1180,7 @@ void main() {
   });
 
   testWidgets(
-      'GradientAppBar positioning of leading and trailing widgets with top padding',
+      'NewGradientAppBar positioning of leading and trailing widgets with top padding',
       (WidgetTester tester) async {
     const MediaQueryData topPadding100 =
         MediaQueryData(padding: EdgeInsets.only(top: 100.0));
@@ -1201,7 +1201,7 @@ void main() {
           data: topPadding100,
           child: Scaffold(
             primary: false,
-            appBar: GradientAppBar(
+            appBar: NewGradientAppBar(
               leading: Placeholder(key: leadingKey),
               title: Placeholder(key: titleKey),
               actions: <Widget>[Placeholder(key: trailingKey)],
@@ -1211,7 +1211,7 @@ void main() {
       ),
     ));
     expect(
-        tester.getTopLeft(find.byType(GradientAppBar)), const Offset(0.0, 0.0));
+        tester.getTopLeft(find.byType(NewGradientAppBar)), const Offset(0.0, 0.0));
     expect(tester.getTopLeft(find.byKey(leadingKey)),
         const Offset(800.0 - 56.0, 100.0));
     expect(tester.getTopLeft(find.byKey(titleKey)), const Offset(416.0, 100.0));
@@ -1220,7 +1220,7 @@ void main() {
   });
 
   testWidgets(
-      'SliverGradientAppBar positioning of leading and trailing widgets with top padding',
+      'SliverNewGradientAppBar positioning of leading and trailing widgets with top padding',
       (WidgetTester tester) async {
     const MediaQueryData topPadding100 =
         MediaQueryData(padding: EdgeInsets.only(top: 100.0));
@@ -1242,7 +1242,7 @@ void main() {
           child: CustomScrollView(
             primary: true,
             slivers: <Widget>[
-              SliverGradientAppBar(
+              SliverNewGradientAppBar(
                 leading: Placeholder(key: leadingKey),
                 title: Placeholder(key: titleKey),
                 actions: <Widget>[Placeholder(key: trailingKey)],
@@ -1253,7 +1253,7 @@ void main() {
       ),
     ));
     expect(
-        tester.getTopLeft(find.byType(GradientAppBar)), const Offset(0.0, 0.0));
+        tester.getTopLeft(find.byType(NewGradientAppBar)), const Offset(0.0, 0.0));
     expect(tester.getTopLeft(find.byKey(leadingKey)),
         const Offset(800.0 - 56.0, 100.0));
     expect(tester.getTopLeft(find.byKey(titleKey)), const Offset(416.0, 100.0));
@@ -1262,7 +1262,7 @@ void main() {
   });
 
   testWidgets(
-      'SliverGradientAppBar positioning of leading and trailing widgets with bottom padding',
+      'SliverNewGradientAppBar positioning of leading and trailing widgets with bottom padding',
       (WidgetTester tester) async {
     const MediaQueryData topPadding100 =
         MediaQueryData(padding: EdgeInsets.only(top: 100.0, bottom: 50.0));
@@ -1284,7 +1284,7 @@ void main() {
           child: CustomScrollView(
             primary: true,
             slivers: <Widget>[
-              SliverGradientAppBar(
+              SliverNewGradientAppBar(
                 leading: Placeholder(key: leadingKey),
                 title: Placeholder(key: titleKey),
                 actions: <Widget>[Placeholder(key: trailingKey)],
@@ -1294,7 +1294,7 @@ void main() {
         ),
       ),
     ));
-    expect(tester.getRect(find.byType(GradientAppBar)),
+    expect(tester.getRect(find.byType(NewGradientAppBar)),
         const Rect.fromLTRB(0.0, 0.0, 800.00, 100.0 + 56.0));
     expect(tester.getRect(find.byKey(leadingKey)),
         const Rect.fromLTRB(800.0 - 56.0, 100.0, 800.0, 100.0 + 56.0));
@@ -1302,14 +1302,14 @@ void main() {
         const Rect.fromLTRB(0.0, 100.0, 400.0, 100.0 + 56.0));
   });
 
-  testWidgets('SliverGradientAppBar provides correct semantics in LTR',
+  testWidgets('SliverNewGradientAppBar provides correct semantics in LTR',
       (WidgetTester tester) async {
     final SemanticsTester semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
-          child: GradientAppBar(
+          child: NewGradientAppBar(
             leading: const Text('Leading'),
             title: const Text('Title'),
             actions: const <Widget>[
@@ -1382,7 +1382,7 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('SliverGradientAppBar provides correct semantics in RTL',
+  testWidgets('SliverNewGradientAppBar provides correct semantics in RTL',
       (WidgetTester tester) async {
     final SemanticsTester semantics = SemanticsTester(tester);
 
@@ -1393,7 +1393,7 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.rtl,
             child: Center(
-              child: GradientAppBar(
+              child: NewGradientAppBar(
                 leading: const Text('Leading'),
                 title: const Text('Title'),
                 actions: const <Widget>[
@@ -1473,13 +1473,13 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('GradientAppBar draws a light system bar for a dark background',
+  testWidgets('NewGradientAppBar draws a light system bar for a dark background',
       (WidgetTester tester) async {
     final ThemeData darkTheme = ThemeData.dark();
     await tester.pumpWidget(MaterialApp(
       theme: darkTheme,
       home: Scaffold(
-        appBar: GradientAppBar(title: const Text('test')),
+        appBar: NewGradientAppBar(title: const Text('test')),
       ),
     ));
 
@@ -1492,13 +1492,13 @@ void main() {
         ));
   });
 
-  testWidgets('GradientAppBar draws a dark system bar for a light background',
+  testWidgets('NewGradientAppBar draws a dark system bar for a light background',
       (WidgetTester tester) async {
     final ThemeData lightTheme = ThemeData(primaryColor: Colors.white);
     await tester.pumpWidget(MaterialApp(
       theme: lightTheme,
       home: Scaffold(
-        appBar: GradientAppBar(title: const Text('test')),
+        appBar: NewGradientAppBar(title: const Text('test')),
       ),
     ));
 
@@ -1511,7 +1511,7 @@ void main() {
         ));
   });
 
-  testWidgets('Changing SliverGradientAppBar snap from true to false',
+  testWidgets('Changing SliverNewGradientAppBar snap from true to false',
       (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/17598
     const double appBarHeight = 256.0;
@@ -1524,13 +1524,13 @@ void main() {
             return Scaffold(
               body: CustomScrollView(
                 slivers: <Widget>[
-                  SliverGradientAppBar(
+                  SliverNewGradientAppBar(
                     expandedHeight: appBarHeight,
                     pinned: false,
                     floating: true,
                     snap: snap,
                     actions: <Widget>[
-                      FlatButton(
+                      TextButton(
                         child: const Text('snap=false'),
                         onPressed: () {
                           setState(() {
@@ -1574,10 +1574,10 @@ void main() {
     await tester.pump();
   });
 
-  testWidgets('GradientAppBar shape default', (WidgetTester tester) async {
+  testWidgets('NewGradientAppBar shape default', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: GradientAppBar(
+        home: NewGradientAppBar(
           leading: const Text('L'),
           title: const Text('No Scaffold'),
           actions: const <Widget>[Text('A1'), Text('A2')],
@@ -1585,10 +1585,10 @@ void main() {
       ),
     );
 
-    final Finder appBarFinder = find.byType(GradientAppBar);
-    GradientAppBar getGradientAppBarWidget(Finder finder) =>
-        tester.widget<GradientAppBar>(finder);
-    expect(getGradientAppBarWidget(appBarFinder).shape, null);
+    final Finder appBarFinder = find.byType(NewGradientAppBar);
+    NewGradientAppBar getNewGradientAppBarWidget(Finder finder) =>
+        tester.widget<NewGradientAppBar>(finder);
+    expect(getNewGradientAppBarWidget(appBarFinder).shape, null);
 
     final Finder materialFinder = find.byType(Material);
     Material getMaterialWidget(Finder finder) =>
@@ -1596,13 +1596,13 @@ void main() {
     expect(getMaterialWidget(materialFinder).shape, null);
   });
 
-  testWidgets('GradientAppBar with shape', (WidgetTester tester) async {
+  testWidgets('NewGradientAppBar with shape', (WidgetTester tester) async {
     const RoundedRectangleBorder roundedRectangleBorder =
         RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0)));
     await tester.pumpWidget(
       MaterialApp(
-        home: GradientAppBar(
+        home: NewGradientAppBar(
           leading: const Text('L'),
           title: const Text('No Scaffold'),
           actions: const <Widget>[Text('A1'), Text('A2')],
@@ -1611,10 +1611,10 @@ void main() {
       ),
     );
 
-    final Finder appBarFinder = find.byType(GradientAppBar);
-    GradientAppBar getGradientAppBarWidget(Finder finder) =>
-        tester.widget<GradientAppBar>(finder);
-    expect(getGradientAppBarWidget(appBarFinder).shape, roundedRectangleBorder);
+    final Finder appBarFinder = find.byType(NewGradientAppBar);
+    NewGradientAppBar getNewGradientAppBarWidget(Finder finder) =>
+        tester.widget<NewGradientAppBar>(finder);
+    expect(getNewGradientAppBarWidget(appBarFinder).shape, roundedRectangleBorder);
 
     final Finder materialFinder = find.byType(Material);
     Material getMaterialWidget(Finder finder) =>
@@ -1622,13 +1622,13 @@ void main() {
     expect(getMaterialWidget(materialFinder).shape, roundedRectangleBorder);
   });
 
-  testWidgets('SliverGradientAppBar shape default',
+  testWidgets('SliverNewGradientAppBar shape default',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
-            SliverGradientAppBar(
+            SliverNewGradientAppBar(
               leading: Text('L'),
               title: Text('No Scaffold'),
               actions: <Widget>[Text('A1'), Text('A2')],
@@ -1638,11 +1638,11 @@ void main() {
       ),
     );
 
-    final Finder sliverGradientAppBarFinder = find.byType(SliverGradientAppBar);
-    SliverGradientAppBar getSliverGradientAppBarWidget(Finder finder) =>
-        tester.widget<SliverGradientAppBar>(finder);
+    final Finder sliverNewGradientAppBarFinder = find.byType(SliverNewGradientAppBar);
+    SliverNewGradientAppBar getSliverNewGradientAppBarWidget(Finder finder) =>
+        tester.widget<SliverNewGradientAppBar>(finder);
     expect(
-        getSliverGradientAppBarWidget(sliverGradientAppBarFinder).shape, null);
+        getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape, null);
 
     final Finder materialFinder = find.byType(Material);
     Material getMaterialWidget(Finder finder) =>
@@ -1650,7 +1650,7 @@ void main() {
     expect(getMaterialWidget(materialFinder).shape, null);
   });
 
-  testWidgets('SliverGradientAppBar with shape', (WidgetTester tester) async {
+  testWidgets('SliverNewGradientAppBar with shape', (WidgetTester tester) async {
     const RoundedRectangleBorder roundedRectangleBorder =
         RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -1659,7 +1659,7 @@ void main() {
       const MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
-            SliverGradientAppBar(
+            SliverNewGradientAppBar(
               leading: Text('L'),
               title: Text('No Scaffold'),
               actions: <Widget>[Text('A1'), Text('A2')],
@@ -1670,10 +1670,10 @@ void main() {
       ),
     );
 
-    final Finder sliverGradientAppBarFinder = find.byType(SliverGradientAppBar);
-    SliverGradientAppBar getSliverGradientAppBarWidget(Finder finder) =>
-        tester.widget<SliverGradientAppBar>(finder);
-    expect(getSliverGradientAppBarWidget(sliverGradientAppBarFinder).shape,
+    final Finder sliverNewGradientAppBarFinder = find.byType(SliverNewGradientAppBar);
+    SliverNewGradientAppBar getSliverNewGradientAppBarWidget(Finder finder) =>
+        tester.widget<SliverNewGradientAppBar>(finder);
+    expect(getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape,
         roundedRectangleBorder);
 
     final Finder materialFinder = find.byType(Material);
