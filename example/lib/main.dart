@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import './../../lib/gradient_app_bar.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 void main() => runApp(MyApp());
 
