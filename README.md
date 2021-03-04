@@ -1,6 +1,6 @@
-# Gradient App Bar
+# New Gradient App Bar
 
-Love the material AppBar? Do you want to add more color to the appbar? Here's a gradientAppBar.
+Love the material AppBar? Do you want to add more color to the appbar? Here's a newGradientAppBar.
 
 It works just like the normal AppBar. Also with actions, back buttons, titles. So it's just your normal AppBar, but with a twist!
 
@@ -12,15 +12,15 @@ It works just like the normal AppBar. Also with actions, back buttons, titles. S
 
 ## Getting Started
 
-1. Depend on it by adding this to your pubspec.yaml file: ```gradient_app_bar: ^0.1.3```
+1. Depend on it by adding this to your pubspec.yaml file: ```new_gradient_app_bar: ^0.1.4```
 
-2. Import it: ```import 'package:gradient_app_bar/gradient_app_bar.dart'```
+2. Import it: ```import 'package:new_gradient_app_bar/new_gradient_app_bar.dart'```
 
-3. Replace your current AppBar (In the scaffold) to GradientAppBar. 
+3. Replace your current AppBar (In the scaffold) to NewGradientAppBar. 
 
 
 ```
-appBar: GradientAppBar(
+appBar: NewGradientAppBar(
     title: Text('Flutter'),
     gradient: LinearGradient(colors: [Colors.blue, Colors.purple, Colors.red])
   ),

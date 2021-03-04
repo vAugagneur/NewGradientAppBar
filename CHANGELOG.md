@@ -1,3 +1,12 @@
+## [0.1.5] - 04 March 2021
+
+ - Update using dartfmt
+
+## [0.1.4] - 04 March 2021
+
+ - Update to nullsafety
+ - Update package name
+
 ## [0.1.3] - 15 Juli 2019
 
  - Remove obsolete import
