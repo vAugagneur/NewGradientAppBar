@@ -53,7 +53,7 @@ class TestSemantics {
     this.children = const <TestSemantics>[],
     this.scrollIndex,
     this.scrollChildren,
-    Iterable<SemanticsTag> tags,
+    Iterable<SemanticsTag>? tags,
   })  : assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
         assert(label != null),
@@ -80,7 +80,7 @@ class TestSemantics {
     this.children = const <TestSemantics>[],
     this.scrollIndex,
     this.scrollChildren,
-    Iterable<SemanticsTag> tags,
+    Iterable<SemanticsTag>? tags,
   })  : id = 0,
         assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
@@ -115,14 +115,14 @@ class TestSemantics {
     this.decreasedValue = '',
     this.textDirection,
     this.rect,
-    Matrix4 transform,
+    Matrix4? transform,
     this.elevation,
     this.thickness,
     this.textSelection,
     this.children = const <TestSemantics>[],
     this.scrollIndex,
     this.scrollChildren,
-    Iterable<SemanticsTag> tags,
+    Iterable<SemanticsTag>? tags,
   })  : assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
         assert(label != null),
@@ -130,7 +130,7 @@ class TestSemantics {
         assert(increasedValue != null),
         assert(decreasedValue != null),
         assert(hint != null),
-        transform = _applyRootChildScale(transform),
+        transform = _applyRootChildScale(transform!),
         assert(children != null),
         tags = tags?.toSet() ?? <SemanticsTag>{};
 
@@ -138,7 +138,7 @@ class TestSemantics {
   ///
   /// The root node has an id of zero. Other nodes are given a unique id when
   /// they are created.
-  final int id;
+  final int? id;
 
   /// The [SemanticsFlag]s set on this node.
   ///
@@ -182,7 +182,7 @@ class TestSemantics {
   /// Even if this is not set, the [hasSemantics] matcher will verify that if a
   /// label is present on the [SemanticsNode], a [SemanticsNode.textDirection]
   /// is also set.
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// The bounding box for this node in its coordinate system.
   ///
@@ -193,7 +193,7 @@ class TestSemantics {
   ///
   ///  * [TestSemantics.fullScreen] 800x600, the test screen's size in logical
   ///    pixels, useful for other full-screen widgets.
-  final Rect rect;
+  final Rect? rect;
 
   /// The test screen's size in physical pixels, typically used as the [rect]
   /// for the node with id zero.
@@ -211,7 +211,7 @@ class TestSemantics {
   /// By default, the transform is null, which represents the identity
   /// transformation (i.e., that this node has the same coordinate system as its
   /// parent).
-  final Matrix4 transform;
+  final Matrix4? transform;
 
   /// The elevation of this node relative to the parent node.
   ///
@@ -219,26 +219,26 @@ class TestSemantics {
   ///
   ///  * [SemanticsConfiguration.elevation] for a detailed discussion regarding
   ///    elevation and semantics.
-  final double elevation;
+  final double? elevation;
 
   /// The extend that this node occupies in z-direction starting at [elevation].
   ///
   /// See also:
   ///
   ///  * [SemanticsConfiguration.thickness] for a more detailed definition.
-  final double thickness;
+  final double? thickness;
 
   /// The index of the first visible semantic node within a scrollable.
-  final int scrollIndex;
+  final int? scrollIndex;
 
   /// The total number of semantic nodes within a scrollable.
-  final int scrollChildren;
+  final int? scrollChildren;
 
-  final TextSelection textSelection;
+  final TextSelection? textSelection;
 
   static Matrix4 _applyRootChildScale(Matrix4 transform) {
     final Matrix4 result = Matrix4.diagonal3Values(3.0, 3.0, 1.0);
-    if (transform != null) result.multiply(transform);
+    result.multiply(transform);
     return result;
   }
 
@@ -394,7 +394,7 @@ class TestSemantics {
       buf.writeln('$indent  textDirection: $textDirection,');
     if (textSelection?.isValid == true)
       buf.writeln(
-          '$indent  textSelection:\n[${textSelection.start}, ${textSelection.end}],');
+          '$indent  textSelection:\n[${textSelection!.start}, ${textSelection!.end}],');
     if (scrollIndex != null) buf.writeln('$indent scrollIndex: $scrollIndex,');
     if (rect != null) buf.writeln('$indent  rect: $rect,');
     if (transform != null)
@@ -434,7 +434,7 @@ class SemanticsTester {
 
   /// The widget tester that this object is testing the semantics of.
   final WidgetTester tester;
-  SemanticsHandle _semanticsHandle;
+  SemanticsHandle? _semanticsHandle;
 
   /// Release resources held by this semantics tester.
   ///
@@ -459,16 +459,16 @@ class SemanticsTester {
   ///
   /// If `ancestor` is not null, only the descendants of it are returned.
   Iterable<SemanticsNode> nodesWith({
-    String label,
-    String value,
-    String hint,
-    TextDirection textDirection,
-    List<SemanticsAction> actions,
-    List<SemanticsFlag> flags,
-    double scrollPosition,
-    double scrollExtentMax,
-    double scrollExtentMin,
-    SemanticsNode ancestor,
+    String? label,
+    String? value,
+    String? hint,
+    TextDirection? textDirection,
+    List<SemanticsAction>? actions,
+    List<SemanticsFlag>? flags,
+    double? scrollPosition,
+    double? scrollExtentMax,
+    double? scrollExtentMin,
+    SemanticsNode? ancestor,
   }) {
     bool checkNode(SemanticsNode node) {
       if (label != null && node.label != label) return false;
@@ -509,7 +509,7 @@ class SemanticsTester {
     if (ancestor != null) {
       visit(ancestor);
     } else {
-      visit(tester.binding.pipelineOwner.semanticsOwner.rootSemanticsNode);
+      visit((tester.binding.pipelineOwner.semanticsOwner!.rootSemanticsNode)!);
     }
     return result;
   }
@@ -564,9 +564,9 @@ class SemanticsTester {
   /// individually.
   String generateTestSemanticsExpressionForCurrentSemanticsTree(
       DebugSemanticsDumpOrder childOrder) {
-    final SemanticsNode node =
+    final SemanticsNode? node =
         tester.binding.pipelineOwner.semanticsOwner?.rootSemanticsNode;
-    return _generateSemanticsTestForNode(node, 0, childOrder);
+    return _generateSemanticsTestForNode(node!, 0, childOrder);
   }
 
   static String _flagsToSemanticsFlagExpression(dynamic flags) {
@@ -607,7 +607,7 @@ class SemanticsTester {
     buf.writeln('TestSemantics${isRoot ? '.root' : ''}(');
     if (!isRoot) buf.writeln('  id: ${node.id},');
     if (nodeData.tags != null)
-      buf.writeln('  tags: ${_tagsToSemanticsTagExpression(nodeData.tags)},');
+      buf.writeln('  tags: ${_tagsToSemanticsTagExpression(nodeData.tags!)},');
     if (nodeData.flags != 0)
       buf.writeln(
           '  flags: ${_flagsToSemanticsFlagExpression(nodeData.flags)},');
@@ -655,11 +655,11 @@ class SemanticsTester {
 class _HasSemantics extends Matcher {
   const _HasSemantics(
     this._semantics, {
-    @required this.ignoreRect,
-    @required this.ignoreTransform,
-    @required this.ignoreId,
-    @required this.childOrder,
-  })  : assert(_semantics != null),
+    required this.ignoreRect,
+    required this.ignoreTransform,
+    required this.ignoreId,
+    required this.childOrder,
+  })   : assert(_semantics != null),
         assert(ignoreRect != null),
         assert(ignoreId != null),
         assert(ignoreTransform != null),
@@ -675,7 +675,7 @@ class _HasSemantics extends Matcher {
   bool matches(
       covariant SemanticsTester item, Map<dynamic, dynamic> matchState) {
     final bool doesMatch = _semantics._matches(
-      item.tester.binding.pipelineOwner.semanticsOwner?.rootSemanticsNode,
+      (item.tester.binding.pipelineOwner.semanticsOwner?.rootSemanticsNode)!,
       matchState,
       ignoreTransform: ignoreTransform,
       ignoreRect: ignoreRect,
@@ -713,8 +713,8 @@ class _HasSemantics extends Matcher {
     Description result = mismatchDescription
         .add('${matchState[TestSemantics]}\n')
         .add('Current SemanticsNode tree:\n')
-        .add(_indent(RendererBinding.instance?.renderView?.debugSemantics
-            ?.toStringDeep(childOrder: childOrder)))
+        .add(_indent((RendererBinding.instance?.renderView.debugSemantics
+            ?.toStringDeep(childOrder: childOrder))!))
         .add('\n')
         .add(
             'The semantics tree would have matched the following configuration:\n')
@@ -762,15 +762,15 @@ class _IncludesNodeWith extends Matcher {
             scrollExtentMax != null ||
             scrollExtentMin != null);
 
-  final String label;
-  final String value;
-  final String hint;
-  final TextDirection textDirection;
-  final List<SemanticsAction> actions;
-  final List<SemanticsFlag> flags;
-  final double scrollPosition;
-  final double scrollExtentMax;
-  final double scrollExtentMin;
+  final String? label;
+  final String? value;
+  final String? hint;
+  final TextDirection? textDirection;
+  final List<SemanticsAction>? actions;
+  final List<SemanticsFlag>? flags;
+  final double? scrollPosition;
+  final double? scrollExtentMax;
+  final double? scrollExtentMin;
 
   @override
   bool matches(
@@ -807,9 +807,10 @@ class _IncludesNodeWith extends Matcher {
     if (label != null) strings.add('label "$label"');
     if (value != null) strings.add('value "$value"');
     if (hint != null) strings.add('hint "$hint"');
-    if (textDirection != null) strings.add(' (${describeEnum(textDirection)})');
-    if (actions != null) strings.add('actions "${actions.join(', ')}"');
-    if (flags != null) strings.add('flags "${flags.join(', ')}"');
+    if (textDirection != null)
+      strings.add(' (${describeEnum(textDirection!)})');
+    if (actions != null) strings.add('actions "${actions!.join(', ')}"');
+    if (flags != null) strings.add('flags "${flags!.join(', ')}"');
     if (scrollPosition != null) strings.add('scrollPosition "$scrollPosition"');
     if (scrollExtentMax != null)
       strings.add('scrollExtentMax "$scrollExtentMax"');
@@ -824,25 +825,25 @@ class _IncludesNodeWith extends Matcher {
 ///
 /// If null is provided for an argument, it will match against any value.
 Matcher includesNodeWith({
-  String label,
-  String value,
-  String hint,
-  TextDirection textDirection,
-  List<SemanticsAction> actions,
-  List<SemanticsFlag> flags,
-  double scrollPosition,
-  double scrollExtentMax,
-  double scrollExtentMin,
+  String? label,
+  String? value,
+  String? hint,
+  TextDirection? textDirection,
+  List<SemanticsAction>? actions,
+  List<SemanticsFlag>? flags,
+  double? scrollPosition,
+  double? scrollExtentMax,
+  double? scrollExtentMin,
 }) {
   return _IncludesNodeWith(
-    label: label,
-    value: value,
-    hint: hint,
-    textDirection: textDirection,
-    actions: actions,
-    flags: flags,
-    scrollPosition: scrollPosition,
-    scrollExtentMax: scrollExtentMax,
-    scrollExtentMin: scrollExtentMin,
+    label: label!,
+    value: value!,
+    hint: hint!,
+    textDirection: textDirection!,
+    actions: actions!,
+    flags: flags!,
+    scrollPosition: scrollPosition!,
+    scrollExtentMax: scrollExtentMax!,
+    scrollExtentMin: scrollExtentMin!,
   );
 }

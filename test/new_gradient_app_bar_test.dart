@@ -7,7 +7,7 @@ import './semantics_tester.dart';
 import '../lib/new_gradient_app_bar.dart';
 
 Widget buildSliverNewGradientAppBarApp(
-    {bool floating, bool pinned, double expandedHeight, bool snap = false}) {
+    {bool? floating, bool? pinned, double? expandedHeight, bool snap = false}) {
   return Localizations(
     locale: const Locale('en', 'US'),
     delegates: const <LocalizationsDelegate<dynamic>>[
@@ -26,9 +26,9 @@ Widget buildSliverNewGradientAppBarApp(
               slivers: <Widget>[
                 SliverNewGradientAppBar(
                   title: const Text('NewGradientAppBar Title'),
-                  floating: floating,
-                  pinned: pinned,
-                  expandedHeight: expandedHeight,
+                  floating: floating!,
+                  pinned: pinned!,
+                  expandedHeight: expandedHeight!,
                   snap: snap,
                   bottom: TabBar(
                     tabs: <String>['A', 'B', 'C']
@@ -51,7 +51,7 @@ Widget buildSliverNewGradientAppBarApp(
   );
 }
 
-ScrollController primaryScrollController(WidgetTester tester) {
+ScrollController? primaryScrollController(WidgetTester tester) {
   return PrimaryScrollController.of(
       tester.element(find.byType(CustomScrollView)));
 }
@@ -62,8 +62,9 @@ double appBarHeight(WidgetTester tester) =>
 double appBarTop(WidgetTester tester) =>
     tester.getTopLeft(find.byType(NewGradientAppBar, skipOffstage: false)).dy;
 
-double appBarBottom(WidgetTester tester) =>
-    tester.getBottomLeft(find.byType(NewGradientAppBar, skipOffstage: false)).dy;
+double appBarBottom(WidgetTester tester) => tester
+    .getBottomLeft(find.byType(NewGradientAppBar, skipOffstage: false))
+    .dy;
 
 double tabBarHeight(WidgetTester tester) =>
     tester.getSize(find.byType(TabBar, skipOffstage: false)).height;
@@ -172,7 +173,8 @@ void main() {
     expect(center.dx, lessThan(400 + size.width / 2.0));
   });
 
-  testWidgets('NewGradientAppBar centerTitle:false title start edge is 16.0 (LTR)',
+  testWidgets(
+      'NewGradientAppBar centerTitle:false title start edge is 16.0 (LTR)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -190,7 +192,8 @@ void main() {
     expect(tester.getTopRight(titleWidget).dx, 800 - 16.0);
   });
 
-  testWidgets('NewGradientAppBar centerTitle:false title start edge is 16.0 (RTL)',
+  testWidgets(
+      'NewGradientAppBar centerTitle:false title start edge is 16.0 (RTL)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -211,7 +214,8 @@ void main() {
     expect(tester.getTopLeft(titleWidget).dx, 16.0);
   });
 
-  testWidgets('NewGradientAppBar titleSpacing:32 title start edge is 32.0 (LTR)',
+  testWidgets(
+      'NewGradientAppBar titleSpacing:32 title start edge is 32.0 (LTR)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -230,7 +234,8 @@ void main() {
     expect(tester.getTopRight(titleWidget).dx, 800 - 32.0);
   });
 
-  testWidgets('NewGradientAppBar titleSpacing:32 title start edge is 32.0 (RTL)',
+  testWidgets(
+      'NewGradientAppBar titleSpacing:32 title start edge is 32.0 (RTL)',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -300,7 +305,7 @@ void main() {
 
     final Key titleKey = UniqueKey();
     Widget leading = Container();
-    List<Widget> actions;
+    List<Widget>? actions;
 
     Widget buildApp() {
       return MaterialApp(
@@ -368,8 +373,8 @@ void main() {
 
     final Key titleKey = UniqueKey();
     double titleWidth = 700.0;
-    Widget leading = Container();
-    List<Widget> actions;
+    Widget? leading = Container();
+    List<Widget>? actions;
 
     Widget buildApp() {
       return MaterialApp(
@@ -421,8 +426,8 @@ void main() {
 
     final Key titleKey = UniqueKey();
     double titleWidth = 700.0;
-    Widget leading = Container();
-    List<Widget> actions;
+    Widget? leading = Container();
+    List<Widget>? actions;
 
     Widget buildApp() {
       return MaterialApp(
@@ -469,7 +474,8 @@ void main() {
     expect(tester.getSize(title).width, equals(620.0));
   });
 
-  testWidgets('NewGradientAppBar with no Scaffold', (WidgetTester tester) async {
+  testWidgets('NewGradientAppBar with no Scaffold',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: SizedBox(
@@ -606,25 +612,24 @@ void main() {
     await tester.pumpWidget(buildSliverNewGradientAppBarApp(
       floating: false,
       pinned: false,
-      expandedHeight: null,
     ));
 
-    final ScrollController controller = primaryScrollController(tester);
-    expect(controller.offset, 0.0);
+    final ScrollController? controller = primaryScrollController(tester);
+    expect(controller!.offset, 0.0);
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
 
     final double initialNewGradientAppBarHeight = appBarHeight(tester);
     final double initialTabBarHeight = tabBarHeight(tester);
 
     // Scroll the not-pinned appbar partially out of view
-    controller.jumpTo(50.0);
+    controller!.jumpTo(50.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
 
     // Scroll the not-pinned appbar out of view
-    controller.jumpTo(600.0);
+    controller!.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsNothing);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
@@ -646,8 +651,8 @@ void main() {
       expandedHeight: 128.0,
     ));
 
-    final ScrollController controller = primaryScrollController(tester);
-    expect(controller.offset, 0.0);
+    final ScrollController? controller = primaryScrollController(tester);
+    expect(controller!.offset, 0.0);
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), 128.0);
 
@@ -656,7 +661,7 @@ void main() {
 
     // Scroll the not-pinned appbar, collapsing the expanded height. At this
     // point both the toolbar and the tabbar are visible.
-    controller.jumpTo(600.0);
+    controller!.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
@@ -664,7 +669,7 @@ void main() {
     expect(appBarHeight(tester), greaterThan(initialTabBarHeight));
 
     // Scroll the not-pinned appbar back into view
-    controller.jumpTo(0.0);
+    controller!.jumpTo(0.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
@@ -679,8 +684,8 @@ void main() {
       expandedHeight: 128.0,
     ));
 
-    final ScrollController controller = primaryScrollController(tester);
-    expect(controller.offset, 0.0);
+    final ScrollController? controller = primaryScrollController(tester);
+    expect(controller!.offset, 0.0);
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), 128.0);
 
@@ -689,7 +694,7 @@ void main() {
 
     // Scroll the floating-pinned appbar, collapsing the expanded height. At this
     // point only the tabBar is visible.
-    controller.jumpTo(600.0);
+    controller!.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
@@ -1210,8 +1215,8 @@ void main() {
         ),
       ),
     ));
-    expect(
-        tester.getTopLeft(find.byType(NewGradientAppBar)), const Offset(0.0, 0.0));
+    expect(tester.getTopLeft(find.byType(NewGradientAppBar)),
+        const Offset(0.0, 0.0));
     expect(tester.getTopLeft(find.byKey(leadingKey)),
         const Offset(800.0 - 56.0, 100.0));
     expect(tester.getTopLeft(find.byKey(titleKey)), const Offset(416.0, 100.0));
@@ -1252,8 +1257,8 @@ void main() {
         ),
       ),
     ));
-    expect(
-        tester.getTopLeft(find.byType(NewGradientAppBar)), const Offset(0.0, 0.0));
+    expect(tester.getTopLeft(find.byType(NewGradientAppBar)),
+        const Offset(0.0, 0.0));
     expect(tester.getTopLeft(find.byKey(leadingKey)),
         const Offset(800.0 - 56.0, 100.0));
     expect(tester.getTopLeft(find.byKey(titleKey)), const Offset(416.0, 100.0));
@@ -1473,7 +1478,8 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('NewGradientAppBar draws a light system bar for a dark background',
+  testWidgets(
+      'NewGradientAppBar draws a light system bar for a dark background',
       (WidgetTester tester) async {
     final ThemeData darkTheme = ThemeData.dark();
     await tester.pumpWidget(MaterialApp(
@@ -1492,7 +1498,8 @@ void main() {
         ));
   });
 
-  testWidgets('NewGradientAppBar draws a dark system bar for a light background',
+  testWidgets(
+      'NewGradientAppBar draws a dark system bar for a light background',
       (WidgetTester tester) async {
     final ThemeData lightTheme = ThemeData(primaryColor: Colors.white);
     await tester.pumpWidget(MaterialApp(
@@ -1614,7 +1621,8 @@ void main() {
     final Finder appBarFinder = find.byType(NewGradientAppBar);
     NewGradientAppBar getNewGradientAppBarWidget(Finder finder) =>
         tester.widget<NewGradientAppBar>(finder);
-    expect(getNewGradientAppBarWidget(appBarFinder).shape, roundedRectangleBorder);
+    expect(
+        getNewGradientAppBarWidget(appBarFinder).shape, roundedRectangleBorder);
 
     final Finder materialFinder = find.byType(Material);
     Material getMaterialWidget(Finder finder) =>
@@ -1638,11 +1646,13 @@ void main() {
       ),
     );
 
-    final Finder sliverNewGradientAppBarFinder = find.byType(SliverNewGradientAppBar);
+    final Finder sliverNewGradientAppBarFinder =
+        find.byType(SliverNewGradientAppBar);
     SliverNewGradientAppBar getSliverNewGradientAppBarWidget(Finder finder) =>
         tester.widget<SliverNewGradientAppBar>(finder);
     expect(
-        getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape, null);
+        getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape,
+        null);
 
     final Finder materialFinder = find.byType(Material);
     Material getMaterialWidget(Finder finder) =>
@@ -1650,7 +1660,8 @@ void main() {
     expect(getMaterialWidget(materialFinder).shape, null);
   });
 
-  testWidgets('SliverNewGradientAppBar with shape', (WidgetTester tester) async {
+  testWidgets('SliverNewGradientAppBar with shape',
+      (WidgetTester tester) async {
     const RoundedRectangleBorder roundedRectangleBorder =
         RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -1670,10 +1681,12 @@ void main() {
       ),
     );
 
-    final Finder sliverNewGradientAppBarFinder = find.byType(SliverNewGradientAppBar);
+    final Finder sliverNewGradientAppBarFinder =
+        find.byType(SliverNewGradientAppBar);
     SliverNewGradientAppBar getSliverNewGradientAppBarWidget(Finder finder) =>
         tester.widget<SliverNewGradientAppBar>(finder);
-    expect(getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape,
+    expect(
+        getSliverNewGradientAppBarWidget(sliverNewGradientAppBarFinder).shape,
         roundedRectangleBorder);
 
     final Finder materialFinder = find.byType(Material);
