@@ -182,12 +182,7 @@ class NewGradientAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
-  })  : assert(automaticallyImplyLeading != null),
-        assert(elevation == null || elevation >= 0.0),
-        assert(primary != null),
-        assert(titleSpacing != null),
-        assert(toolbarOpacity != null),
-        assert(bottomOpacity != null),
+  })  : assert(elevation == null || elevation >= 0.0),
         preferredSize = Size.fromHeight(
             kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
         super(key: key);
@@ -386,7 +381,6 @@ class NewGradientAppBar extends StatefulWidget implements PreferredSizeWidget {
       case TargetPlatform.windows:
         return false;
     }
-    return null;
   }
 
   @override
@@ -738,7 +732,7 @@ class _SliverGradientAppBarDelegate extends SliverPersistentHeaderDelegate {
     //    1   |    0     |        1       ||  1.0
     //    1   |    1     |        0       ||  1.0
     //    1   |    1     |        1       ||  fade
-    final double toolbarOpacity = !pinned || (floating && bottom != null)
+    final double toolbarOpacity = !pinned || (floating)
         ? ((visibleMainHeight - _bottomHeight) / kToolbarHeight).clamp(0.0, 1.0)
         : 1.0;
 
@@ -752,6 +746,7 @@ class _SliverGradientAppBarDelegate extends SliverPersistentHeaderDelegate {
         automaticallyImplyLeading: automaticallyImplyLeading,
         title: title,
         actions: actions,
+        // ignore: unnecessary_null_comparison
         flexibleSpace: (title == null && flexibleSpace != null)
             ? Semantics(child: flexibleSpace, header: true)
             : flexibleSpace,
@@ -915,14 +910,7 @@ class SliverNewGradientAppBar extends StatefulWidget {
     this.pinned = false,
     this.snap = false,
     this.shape,
-  })  : assert(automaticallyImplyLeading != null),
-        assert(forceElevated != null),
-        assert(primary != null),
-        assert(titleSpacing != null),
-        assert(floating != null),
-        assert(pinned != null),
-        assert(snap != null),
-        assert(floating || !snap,
+  })  : assert(floating || !snap,
             'The "snap" argument only makes sense for floating app bars.'),
         super(key: key);
 

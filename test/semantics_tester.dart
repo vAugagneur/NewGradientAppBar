@@ -56,12 +56,6 @@ class TestSemantics {
     Iterable<SemanticsTag>? tags,
   })  : assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
-        assert(label != null),
-        assert(value != null),
-        assert(increasedValue != null),
-        assert(decreasedValue != null),
-        assert(hint != null),
-        assert(children != null),
         tags = tags?.toSet() ?? <SemanticsTag>{};
 
   /// Creates an object with some test semantics data, with the [id] and [rect]
@@ -84,15 +78,9 @@ class TestSemantics {
   })  : id = 0,
         assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
-        assert(label != null),
-        assert(increasedValue != null),
-        assert(decreasedValue != null),
-        assert(value != null),
-        assert(hint != null),
         rect = TestSemantics.rootRect,
         elevation = 0.0,
         thickness = 0.0,
-        assert(children != null),
         tags = tags?.toSet() ?? <SemanticsTag>{};
 
   /// Creates an object with some test semantics data, with the [id] and [rect]
@@ -125,13 +113,7 @@ class TestSemantics {
     Iterable<SemanticsTag>? tags,
   })  : assert(flags is int || flags is List<SemanticsFlag>),
         assert(actions is int || actions is List<SemanticsAction>),
-        assert(label != null),
-        assert(value != null),
-        assert(increasedValue != null),
-        assert(decreasedValue != null),
-        assert(hint != null),
         transform = _applyRootChildScale(transform!),
-        assert(children != null),
         tags = tags?.toSet() ?? <SemanticsTag>{};
 
   /// The unique identifier for this node.
@@ -261,6 +243,7 @@ class TestSemantics {
       return false;
     }
 
+    // ignore: unnecessary_null_comparison
     if (node == null) return fail('could not find node with id $id.');
     if (!ignoreId && id != node.id)
       return fail('expected node id $id but found id ${node.id}.');
@@ -381,15 +364,13 @@ class TestSemantics {
         actions is List<SemanticsAction> && actions.isNotEmpty)
       buf.writeln(
           '$indent  actions: ${SemanticsTester._actionsToSemanticsActionExpression(actions)},');
-    if (label != null && label != '')
-      buf.writeln('$indent  label: \'$label\',');
-    if (value != null && value != '')
-      buf.writeln('$indent  value: \'$value\',');
-    if (increasedValue != null && increasedValue != '')
+    if (label != '') buf.writeln('$indent  label: \'$label\',');
+    if (value != '') buf.writeln('$indent  value: \'$value\',');
+    if (increasedValue != '')
       buf.writeln('$indent  increasedValue: \'$increasedValue\',');
-    if (decreasedValue != null && decreasedValue != '')
+    if (decreasedValue != '')
       buf.writeln('$indent  decreasedValue: \'$decreasedValue\',');
-    if (hint != null && hint != '') buf.writeln('$indent  hint: \'$hint\',');
+    if (hint != '') buf.writeln('$indent  hint: \'$hint\',');
     if (textDirection != null)
       buf.writeln('$indent  textDirection: $textDirection,');
     if (textSelection?.isValid == true)
@@ -599,6 +580,7 @@ class SemanticsTester {
   /// indenting the expression by `indentAmount`.
   static String _generateSemanticsTestForNode(SemanticsNode node,
       int indentAmount, DebugSemanticsDumpOrder childOrder) {
+    // ignore: unnecessary_null_comparison
     if (node == null) return 'null';
     final String indent = '  ' * indentAmount;
     final StringBuffer buf = StringBuffer();
@@ -614,7 +596,7 @@ class SemanticsTester {
     if (nodeData.actions != 0)
       buf.writeln(
           '  actions: ${_actionsToSemanticsActionExpression(nodeData.actions)},');
-    if (node.label != null && node.label.isNotEmpty) {
+    if (node.label.isNotEmpty) {
       final String escapedLabel = node.label.replaceAll('\n', r'\n');
       if (escapedLabel != node.label) {
         buf.writeln('  label: r\'$escapedLabel\',');
@@ -622,14 +604,12 @@ class SemanticsTester {
         buf.writeln('  label: \'$escapedLabel\',');
       }
     }
-    if (node.value != null && node.value.isNotEmpty)
-      buf.writeln('  value: \'${node.value}\',');
-    if (node.increasedValue != null && node.increasedValue.isNotEmpty)
+    if (node.value.isNotEmpty) buf.writeln('  value: \'${node.value}\',');
+    if (node.increasedValue.isNotEmpty)
       buf.writeln('  increasedValue: \'${node.increasedValue}\',');
-    if (node.decreasedValue != null && node.decreasedValue.isNotEmpty)
+    if (node.decreasedValue.isNotEmpty)
       buf.writeln('  decreasedValue: \'${node.decreasedValue}\',');
-    if (node.hint != null && node.hint.isNotEmpty)
-      buf.writeln('  hint: \'${node.hint}\',');
+    if (node.hint.isNotEmpty) buf.writeln('  hint: \'${node.hint}\',');
     if (node.textDirection != null)
       buf.writeln('  textDirection: ${node.textDirection},');
     if (node.hasChildren) {
@@ -659,11 +639,7 @@ class _HasSemantics extends Matcher {
     required this.ignoreTransform,
     required this.ignoreId,
     required this.childOrder,
-  })   : assert(_semantics != null),
-        assert(ignoreRect != null),
-        assert(ignoreId != null),
-        assert(ignoreTransform != null),
-        assert(childOrder != null);
+  });
 
   final TestSemantics _semantics;
   final bool ignoreRect;

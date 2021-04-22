@@ -1,3 +1,8 @@
+## [0.2.0] - April 2021
+
+ - Update Dart 2.12.0 [#1](https://github.com/GUIKAR741/NewGradientAppBar/pull/1)
+ - More adaptations to 2.12.0
+
 ## [0.1.5] - 04 March 2021
 
  - Update using dartfmt

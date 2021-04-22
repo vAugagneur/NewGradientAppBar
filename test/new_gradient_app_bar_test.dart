@@ -622,14 +622,14 @@ void main() {
     final double initialTabBarHeight = tabBarHeight(tester);
 
     // Scroll the not-pinned appbar partially out of view
-    controller!.jumpTo(50.0);
+    controller.jumpTo(50.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
     expect(tabBarHeight(tester), initialTabBarHeight);
 
     // Scroll the not-pinned appbar out of view
-    controller!.jumpTo(600.0);
+    controller.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsNothing);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
@@ -661,7 +661,7 @@ void main() {
 
     // Scroll the not-pinned appbar, collapsing the expanded height. At this
     // point both the toolbar and the tabbar are visible.
-    controller!.jumpTo(600.0);
+    controller.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
@@ -669,7 +669,7 @@ void main() {
     expect(appBarHeight(tester), greaterThan(initialTabBarHeight));
 
     // Scroll the not-pinned appbar back into view
-    controller!.jumpTo(0.0);
+    controller.jumpTo(0.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(appBarHeight(tester), initialNewGradientAppBarHeight);
@@ -694,7 +694,7 @@ void main() {
 
     // Scroll the floating-pinned appbar, collapsing the expanded height. At this
     // point only the tabBar is visible.
-    controller!.jumpTo(600.0);
+    controller.jumpTo(600.0);
     await tester.pump();
     expect(find.byType(SliverNewGradientAppBar), findsOneWidget);
     expect(tabBarHeight(tester), initialTabBarHeight);
