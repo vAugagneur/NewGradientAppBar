@@ -421,7 +421,7 @@ class _NewGradientAppBarState extends State<NewGradientAppBar> {
     TextStyle centerStyle = (appBarTheme.titleTextStyle ??
         appBarTheme.titleTextStyle ??
         themeData.primaryTextTheme.headline6)!;
-    TextStyle? sideStyle = widget.toolbarTextStyle ??
+    TextStyle? sideStyle = widget.textTheme?.bodyText2 ??
         appBarTheme.toolbarTextStyle ??
         themeData.primaryTextTheme.bodyText2;
 
