@@ -418,11 +418,11 @@ class _NewGradientAppBarState extends State<NewGradientAppBar> {
     IconThemeData actionsIconTheme = widget.actionsIconTheme ??
         appBarTheme.actionsIconTheme ??
         overallIconTheme;
-    TextStyle centerStyle = (widget.textTheme?.headline6 ??
-        appBarTheme.textTheme?.headline6 ??
+    TextStyle centerStyle = (appBarTheme.titleTextStyle ??
+        appBarTheme.titleTextStyle ??
         themeData.primaryTextTheme.headline6)!;
-    TextStyle? sideStyle = widget.textTheme?.bodyText2 ??
-        appBarTheme.textTheme?.bodyText2 ??
+    TextStyle? sideStyle = widget.toolbarTextStyle ??
+        appBarTheme.toolbarTextStyle ??
         themeData.primaryTextTheme.bodyText2;
 
     if (widget.toolbarOpacity != 1.0) {
